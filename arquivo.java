@@ -21,14 +21,16 @@ public class arquivo {
 		System.out.println();
 		nLinhas = linhas/2;
 		nColunas = nProporcicoes;
-		//System.out.println(nColunas);
+		//System.out.println("numero de colunas: "+nColunas);
 		String matriz[][] = new String[nLinhas][nColunas];
 		for(int i=0;i<matriz.length;i++){
 			for(int j=0;j<matriz[0].length;j++){
-				if(i==0){
+				if(i==0){//primeira linha todos sao V------------------------------------------
 					matriz[i][j] = "V";
-				}else if((i%2!=0)&&(j==nColunas-1)){
+				}if((i%2!=0)&&(j==nColunas-1)){
 					matriz[i][j] = "F";
+				}if((i-1>=0)&&(matriz[i-1][nColunas-1]=="F")){
+					matriz[i][nColunas-1]="V";
 				}
 				if((j==0)&&(nLinhas/2>i)){
 					matriz[i][j] = "V";
@@ -36,17 +38,21 @@ public class arquivo {
 				if((nLinhas/2<=i)&&(j==0)){
 						matriz[i][j] = "F";
 				}
+				if(i>0){//verifica os dois ultimos elementos da linha anterior, se forem iguais, é V, se nao é F
+					if(matriz[i-1][nColunas-1] == matriz[i-1][nColunas-2]){
+						matriz[i][nColunas-2]="V";
+					}else{
+						matriz[i][nColunas-2]="F";
+					}
+				}
 				
-				/*else{
-					matriz[i][j] = "N";
-				}*/
 			}
 		}
 		for (int l = 0; l < matriz.length; l++)  {  
 			for (int c = 0; c < matriz[0].length; c++)     { 
-				System.out.print(matriz[l][c] + " ");
+				System.out.print("|"+matriz[l][c]);
 			}  
-			System.out.println(" "); //muda de linha
+			System.out.println("|"); //muda de linha
 		}
 		//System.out.print("\n"+linhas);
 	}
